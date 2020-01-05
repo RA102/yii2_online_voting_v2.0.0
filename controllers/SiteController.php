@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Site;
+use mdm\admin\models\form\Signup;
+use mdm\admin\models\form\Login;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -43,6 +46,7 @@ class SiteController extends Controller
      */
     public function actions()
     {
+        Yii::$app->session;
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -75,8 +79,9 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        $model = new LoginForm();
+        $model = new Login();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $model = new Site();
             return $this->goBack();
         }
 
@@ -96,6 +101,20 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionSignup()
+    {
+        $model = new Signup();
+        if ($model->load(Yii::$app->getRequest()->post())) {
+            if ($user = $model->signup()) {
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -125,4 +144,5 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
 }
