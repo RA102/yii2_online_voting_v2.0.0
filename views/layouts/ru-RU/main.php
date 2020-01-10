@@ -23,7 +23,7 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="<?= Yii::$app->controller->id . "-" . Yii::$app->controller->action->id ?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -38,7 +38,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => Yii::t('app', 'Student'), 'url' => ['/student/index']],
+            ['label' => Yii::t('app', 'Students'), 'url' => ['/student/index']],
             ['label' => Yii::t('app', 'Result'), 'url' => ['/result-voting/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

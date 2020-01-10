@@ -17,7 +17,7 @@ class ResultVotingSearch extends ResultVoting
     public function rules()
     {
         return [
-            [['id', 'student_id', 'user_id', 'bulletin_type_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'student_id', 'user_id', 'bulletin_type_id', 'created_at', 'updated_at', 'active'], 'integer'],
         ];
     }
 
@@ -63,6 +63,7 @@ class ResultVotingSearch extends ResultVoting
             'bulletin_type_id' => $this->bulletin_type_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'active' => $this->active,
         ]);
 
         return $dataProvider;

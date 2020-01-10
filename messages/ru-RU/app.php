@@ -14,6 +14,11 @@ return [
     'Result' => 'Результаты',
     'Logout' => 'Выход',
     'Login' => 'Вход',
-    'Online-voting' => 'Онлайн голосование',
-    'Please fill out the following fields to login:' => 'Пожалуйста, заполните следующие поля для входа:',
+    'Students' => 'Докторанты',
+    'The requested page does not exist.' => 'Запрошенная страница не существует.',
+    'MARK_ACTIVE' => 'На защите',
+    'No defended' => 'Не защищался',
+    'Mark' => 'На защите',
+    'Defended' => 'Защищался',
+    'BULLETIN_NOT_DEFINED' => 'Не определен',
 ];

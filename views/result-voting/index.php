@@ -15,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-<!--        --><?//= Html::a(Yii::t('app', 'Create Result Voting'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -27,12 +26,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'id',
-            'student_id',
-            'user_id',
-            'bulletin_type_id',
-            'created_at',
-            'updated_at',
+            'student_id' => [
+                    'label' => 'Докторант',
+                'value' => function ($data) {
+                    return $data->student->name;
+                }
+            ],
+            'user_id' => [
+                'label' => 'Члены комиссии',
+                'value' => function ($data) {
+                    return $data->user->username;
+                }
+            ],
+            'bulletin_type_id' => [
+                'label' => 'Тип бюллетеня',
+                'value' => function ($data) {
+                    return $data->bulletinType->bulletin_name;
+                }
+            ],
+            'created_at' => [
+                    'format' => 'datetime',
+                'value' => function ($data) {
+                    return $data->created_at;
+                }
+            ],
+            'updated_at' => [
+                'format' => 'datetime',
+                'value' => function ($data) {
+                    return $data->updated_at;
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

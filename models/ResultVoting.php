@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Query;
 
 /**
  * This is the model class for table "result_voting".
@@ -28,13 +31,28 @@ class ResultVoting extends \yii\db\ActiveRecord
         return 'result_voting';
     }
 
+    public function behaviors()
+    {
+
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_AFTER_UPDATE => ['updated_at'],
+                ],
+            ],
+        ];
+    }
+
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['student_id', 'user_id', 'bulletin_type_id', 'created_at', 'updated_at'], 'integer'],
+            [['student_id', 'user_id', 'bulletin_type_id', 'created_at', 'updated_at', 'active'], 'integer'],
             [['bulletin_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => BulletinType::className(), 'targetAttribute' => ['bulletin_type_id' => 'id']],
             [['student_id'], 'exist', 'skipOnError' => true, 'targetClass' => Student::className(), 'targetAttribute' => ['student_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -53,6 +71,7 @@ class ResultVoting extends \yii\db\ActiveRecord
             'bulletin_type_id' => Yii::t('app', 'Bulletin Type ID'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
+            'active' => 'active'
         ];
     }
 
@@ -78,5 +97,14 @@ class ResultVoting extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public static function getUsersIdByRole($role)
+    {
+        return (new Query())
+            ->select('user_id')
+            ->from('auth_assignment')
+            ->where('auth_assignment.item_name=:role',[':role' => $role])
+            ->all();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Student;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -23,31 +24,54 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'showFooter' => true,
+        'summary' => '',
+        'showFooter' => false,
         'options' => [
-            'style' => 'text-align: center;',
+            'style' => ['text-align: center;'],
         ],
         'headerRowOptions' => [
                 'style' => 'text-align: center;',
         ],
+
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'code',
             'specialty',
-            'theme',
+            'theme' => [
+                'contentOptions' => [
+                    'style' => 'max-width: max-content;',
+                ],
+                'headerOptions' => [
+                        'style' => 'text-align: center;'
+                ],
+                'header' => 'Тема',
+                'value' => function ($data) {
+                    return $data->theme;
+                }
+            ],
             'status_student' => [
-                    'value' => function($data) {
-        return $data->status_student->name_status;
-
+                'value' => function ($data) {
+                    return $data->statusStudent->name_status;
+                },
+            ],
+            '' => [
+                'format' => 'raw',
+                'contentOptions' => ['class' => 'd-table-cell text-center', 'style' => 'vertical-align: middle;'],
+                'value' =>
+                    function ($data) {
+                        return Html::a('Назначить', ['index?active=2&student=' . $data->id],
+                            ['class' => 'btn btn-success appoint btn-sm  mr-1 appoint']);
                     },
             ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '100'],
+                'template' => '{update} {delete}{link}',
+                'contentOptions' => ['class' => 'd-table-cell text-center', 'style' => 'vertical-align: middle;'],
+                'buttons' => [
+
+                ],
             ],
         ],
     ]); ?>
-
-
-</div>

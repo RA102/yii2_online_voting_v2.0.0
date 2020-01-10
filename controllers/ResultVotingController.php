@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\ResultVoting;
 use app\models\ResultVotingSearch;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;

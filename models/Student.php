@@ -19,6 +19,9 @@ use Yii;
  */
 class Student extends \yii\db\ActiveRecord
 {
+
+    const MARK_ACTIVE = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -62,4 +65,11 @@ class Student extends \yii\db\ActiveRecord
     {
         return $this->hasOne(StatusStudent::className(), ['id' => 'status_student']);
     }
+
+    public static function setActiveStudent($id)
+    {
+        return Student::findOne(['id' => $id]);
+    }
+
+
 }

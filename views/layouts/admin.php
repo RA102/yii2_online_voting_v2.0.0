@@ -24,7 +24,6 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 <body class="<?php Yii::$app->controller->id ?>">
-<?php var_dump(Yii::$app->controller->id); ?>
 <?php $this->beginBody() ?>
 
 <div class="wrap">

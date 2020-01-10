@@ -49,8 +49,8 @@ class StatusStudent extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStudents()
-    {
-        return $this->hasMany(Student::className(), ['status_student' => 'id']);
-    }
+//    public function getStudents()
+//    {
+//        return $this->hasMany(Student::className(), ['status_student' => 'id']);
+//    }
 }

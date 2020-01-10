@@ -10,6 +10,7 @@ $config = [
     'version' => '2.1',
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
+    'timeZone' => 'UTC',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
