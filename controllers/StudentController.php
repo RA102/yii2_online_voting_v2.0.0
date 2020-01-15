@@ -6,7 +6,6 @@ use app\models\ResultVoting;
 use Yii;
 use app\models\Student;
 use app\models\StudentSearch;
-use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -70,6 +69,7 @@ class StudentController extends Controller
                 'user_id' => '',
             ];
 
+
             foreach ($allMemberCommission as $item) {
                 $objectResult = new ResultVoting();
                 $objectResult->student_id = Yii::$app->request->get('student');
@@ -89,10 +89,14 @@ class StudentController extends Controller
 
     public function actionIndexCommission()
     {
-        $students = Student::find()->all();
+        $this->view->title = 'Студенты';
+        $this->view->params['breadcrumbs'][] = $this->view->title;
+        $student = Student::findOne(['status_student' => 2]);
+
+
 
         return $this->render('index-commission', [
-            $students
+            'data' => $student,
         ]);
     }
 

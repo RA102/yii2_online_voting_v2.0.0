@@ -40,6 +40,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => Yii::t('app', 'Students'), 'url' => ['/student/index']],
             ['label' => Yii::t('app', 'Result'), 'url' => ['/result-voting/index']],
+            ['label' => Yii::t('app', 'Commission'), 'url' => ['/student/index-commission']],
+
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -68,9 +70,6 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
 </footer>
 

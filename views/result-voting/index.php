@@ -26,34 +26,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'student_id' => [
-                    'label' => 'Докторант',
-                'value' => function ($data) {
-                    return $data->student->name;
-                }
-            ],
-            'user_id' => [
-                'label' => 'Члены комиссии',
-                'value' => function ($data) {
-                    return $data->user->username;
-                }
-            ],
-            'bulletin_type_id' => [
-                'label' => 'Тип бюллетеня',
-                'value' => function ($data) {
-                    return $data->bulletinType->bulletin_name;
-                }
-            ],
+            'student.name',
+            'user.username',
+            'bulletinType.bulletin_name',
             'created_at' => [
-                    'format' => 'datetime',
                 'value' => function ($data) {
-                    return $data->created_at;
+                    return date('H:i:s d-m-Y', $data->created_at) ;
                 }
             ],
             'updated_at' => [
-                'format' => 'datetime',
                 'value' => function ($data) {
-                    return $data->updated_at;
+                    return date('H:i:s d-m-Y', $data->updated_at);
                 }
             ],
 

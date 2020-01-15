@@ -21,17 +21,17 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['login', 'index'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['login'],
+//                        'allow' => true,
+//                        'roles' => ['?'],
+//                    ],
+//                ],
+//            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -56,6 +56,18 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+    
+    public function afterAction($action, $result)
+    {
+//        if (Yii::$app->user->can('administrator')) {
+//            return $this->render('/student/index2');
+//        } elseif (Yii::$app->authManager->getRolesByUser(Yii::$app->getUser()->getId()) == 'manager') {
+//            return $this->render('/student/index');
+//        } else {
+//            return $this->redirect('site/login');
+//        }
+        return parent::afterAction($action, $result);
     }
 
     /**

@@ -122,30 +122,80 @@ a.desc:after {
     color: white;
 }
 
+/*Background градиент*/
+
 body.site-index {
-    background-image: url("/image/best.jpg");
+    background: linear-gradient(136deg, #54ACB2, #D5A2DC) no-repeat;
+    background-blend-mode: hard-light;
 }
+
+
+body.site-index::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: url("image/best.jpg") center / cover no-repeat;
+    filter: blur(10px) grayscale(100%);
+}
+
+
+h1.index-title {
+    color: white;
+    font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    text-align: center;
+    text-shadow: 0.02em 0.02em 0.02em rgba(0, 0, 0, 0.08);
+    filter: drop-shadow(0.045em 0.045em 0.04em rgba(0, 0, 0, 0.21));
+}
+
 
 /**
 Стилизация формы Login
  */
 
+.mr-1 {
+    margin-right: 1rem;
+}
+
+
+
 body.site-login
 {
     height: 100%;
-    background: linear-gradient(120deg, #3498db, #8e44ad);
+    /*background: linear-gradient(120deg, #3498db, #8e44ad);*/
 }
+
+.wrapper-loginForm {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    height: 100%;
+}
+
+.loginForm-div {
+    /*flex: 1;*/
+    max-width: 450px;
+    box-sizing: border-box;
+    border: 10px solid #d3d3d3;
+    border-radius: 10px;
+    height: 380px;
+}
+
+
+
 
 .login-form
 {
-    width: 360px;
-    background: #f1f1f1;
-    height: 480px;
-    padding: 40px 40px 60px;
-    border-radius: 10px;
+    /*width: 360px;*/
+    background: #ffffff;
+    height: 100%;
+    padding: 0 80px;
+    /*border: 10px solid #D3D3D3;*/
+    /*border-radius: 10px;*/
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    /*left: 50%;*/
+    /*transform: translateX(-50%);*/
 }
 
 .login-form h1
@@ -171,13 +221,15 @@ body.site-login
     background: none;
     padding: 0 5px;
     height: 40px;
+    /*height: 20px;*/
 }
 
 .txtb span::before
 {
     content: attr(data-placeholder);
     position: absolute;
-    top: 50%;
+    /*top: 50%;*/
+    top: -20%;
     left: 5px;
     color: #adadad;
     transform: translateY(-50%);
@@ -231,4 +283,50 @@ body.site-login
     margin-top: 60px;
     text-align: center;
     font-size: 13px;
+}
+
+
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+    .mr-1 {
+        margin-right: 0;
+    }
+
+    .wrapper-loginForm {
+        flex-wrap: wrap;
+    }
+
+    .loginForm-div {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .wrapper-loginForm div:first-child {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .mr-1 {
+        margin-right: 1rem;
+    }
+
+    .wrapper-loginForm {
+        flex-wrap: wrap;
+    }
+    .loginForm-div {
+        /*min-width: 360px;*/
+        margin-bottom: 0px;
+    }
+
+}
+
+/* Index Commission */
+
+.st_div_wrapper {
+    border: 5px solid darkgrey;
+    padding: 40px 80px;
+}
+
+.text-decoration-underline {
+    text-decoration: underline;
 }
