@@ -52,7 +52,7 @@ class Student extends \yii\db\ActiveRecord
 
             'name' => Yii::t('app', 'Name'),
             'code' => 'Code',
-            'specialty' => 'Specialty',
+            'specialty' => Yii::t('app', 'Specialty'),
             'theme' => 'Theme',
             'status_student' => 'Статус',
         ];
@@ -69,6 +69,11 @@ class Student extends \yii\db\ActiveRecord
     public static function setActiveStudent($id)
     {
         return Student::findOne(['id' => $id]);
+    }
+
+    public static function getActiveStudent()
+    {
+        return Student::findOne(['status_student' => 3]);
     }
 
 

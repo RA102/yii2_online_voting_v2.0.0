@@ -28,5 +28,5 @@ return [
     'username' => 'Логин',
     'password' => 'Пароль',
     'Retype Password' => 'Повторить пароль',
-
+    'Specialty' => 'Специальность',
 ];

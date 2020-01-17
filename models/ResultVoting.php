@@ -107,4 +107,8 @@ class ResultVoting extends \yii\db\ActiveRecord
             ->where('auth_assignment.item_name=:role',[':role' => $role])
             ->all();
     }
+    public static function getRowTableResultByUserId($id)
+    {
+        return ResultVoting::findOne(['user_id' => $id]);
+    }
 }

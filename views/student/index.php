@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'summary' => '',
         'showFooter' => false,
         'options' => [
-            'style' => ['text-align: center;'],
+            'style' => ['text-align: center'],
         ],
         'headerRowOptions' => [
                 'style' => 'text-align: center;',
@@ -36,13 +36,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'specialty',
+            'specialty' => [
+                'contentOptions' => [
+                    'style' => 'vertical-align: middle'
+                ],
+                'header' => 'Специальность',
+                'value' => function ($data) {
+                    return $data->specialty;
+                }
+            ],
             'theme' => [
                 'contentOptions' => [
-                    'style' => 'max-width: max-content;',
+                    'style' => 'max-width: max-content; vertical-align: middle',
                 ],
                 'headerOptions' => [
-                        'style' => 'text-align: center;'
+                        'style' => 'text-align: center; '
                 ],
                 'header' => 'Тема',
                 'value' => function ($data) {
@@ -50,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'status_student' => [
+                'contentOptions' => ['style' => 'vertical-align: middle; white-space: nowrap;'],
                 'value' => function ($data) {
                     return $data->statusStudent->name_status;
                 },
@@ -75,3 +84,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
     ]); ?>
+
+<?php
+$jsRow = <<<JS
+
+$('tr').on('click', function(event) {
+    console.log(this);
+    this.attr()
+});
+
+JS;
+$this->registerJs($jsRow);
+?>

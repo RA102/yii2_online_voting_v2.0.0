@@ -35,7 +35,44 @@ Html::encode($this->title)
     </div>
 </div>
 
-$js = <<<JS
-    $(')
+<div id="myModalBox" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h3>Спасибо</h3>
+            </div>
+            <div class="modal-body text-center">
 
-    JS;
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<?php
+$js = <<<JS
+    $('#button_voting').on('click', function(event) {
+        event.preventDefault();
+        let elem = new URL(event.target);
+        let parseUrl = elem.search.replace('?', '').trim();
+        console.log(parseUrl);
+
+        $.ajax({
+            url: elem.pathname,
+            type: 'POST',
+            data: parseUrl,
+            success: function(data) {
+                $('#myModalBox').modal('show');
+                $('.modal-body').text(data);
+            },
+            error: function(jqXHR, txtStatus, error) {
+              alert(error);
+            }
+        });
+        return false;
+    });
+
+JS;
+$this->registerJs($js, \yii\web\View::POS_END);
+
+?>

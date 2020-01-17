@@ -6,6 +6,7 @@ use app\models\ResultVoting;
 use Yii;
 use app\models\Student;
 use app\models\StudentSearch;
+use yii\base\View;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -19,6 +20,8 @@ class StudentController extends Controller
 {
 
     const MARK_ACTIVE = 2;
+    const ON_DEFENSE = 3;
+    const DEFENDED = 2;
     const BULLETIN_VOTE_FOR = 1;
     const BULLETIN_VOTE_AGAINST = 2;
     const BULLETIN_INVALID = 3;
@@ -56,10 +59,21 @@ class StudentController extends Controller
         $searchModel = new StudentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if(Yii::$app->request->isAjax) {
+            $student = Student::getActiveStudent();
+            var_dump($student);
+//            ResultVoting::getRowTableResultByUserId(Yii::$app);
+//            return Yii::$app->request->post('type');
+        }
+
         if (Yii::$app->request->get('active')) {
 
+            $previousActiveStudent = Student::getActiveStudent();
+            $previousActiveStudent->status_student = self::DEFENDED;
+            $previousActiveStudent->update();
+
             $student = Student::setActiveStudent(Yii::$app->request->get('student'));
-            $student->status_student = self::MARK_ACTIVE;
+            $student->status_student = self::ON_DEFENSE;
             $student->save();
 
             $allMemberCommission = ResultVoting::getUsersIdByRole('MemberCommission');
@@ -91,7 +105,7 @@ class StudentController extends Controller
     {
         $this->view->title = 'Студенты';
         $this->view->params['breadcrumbs'][] = $this->view->title;
-        $student = Student::findOne(['status_student' => 2]);
+        $student = Student::findOne(['status_student' => 3]);
 
 
 
